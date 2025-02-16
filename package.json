@@ -10,7 +10,11 @@
 		"tsc": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@heroui/button": "^2.2.10",
+		"@heroui/system": "^2.4.7",
+		"@heroui/theme": "^2.4.6",
 		"decode-formdata": "^0.8.0",
+		"framer-motion": "^12.4.3",
 		"next": "15.1.7",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
@@ -26,6 +30,9 @@
 		"typescript": "^5.7.3"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["@biomejs/biome"]
+		"onlyBuiltDependencies": [
+			"@biomejs/biome",
+			"sharp"
+		]
 	}
 }
