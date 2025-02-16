@@ -13,6 +13,8 @@
 		"@heroui/button": "^2.2.10",
 		"@heroui/system": "^2.4.7",
 		"@heroui/theme": "^2.4.6",
+		"@supabase/ssr": "^0.5.2",
+		"@supabase/supabase-js": "^2.48.1",
 		"decode-formdata": "^0.8.0",
 		"framer-motion": "^12.4.3",
 		"next": "15.1.7",

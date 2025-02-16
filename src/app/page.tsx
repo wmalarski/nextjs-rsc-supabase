@@ -1,3 +1,5 @@
+import { Button } from "@heroui/button";
+
 export default function Home() {
-	return <div />;
+	return <Button>Hello</Button>;
 }
