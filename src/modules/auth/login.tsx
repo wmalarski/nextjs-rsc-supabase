@@ -1,30 +1,16 @@
 import { Button } from "@heroui/button";
 import { Form } from "@heroui/form";
 import { Input } from "@heroui/input";
-import { useRouter } from "next/router";
-import { createClient } from "../supabase/component";
+import { loginAction, signUpAction } from "./actions";
 
 export default function LoginForm() {
-	const router = useRouter();
-	const supabase = createClient();
-
-	async function logIn() {
-		//
-	}
-
-	async function signUp() {
-		//
-	}
-
 	return (
 		<main>
-			<Form>
+			<Form action={loginAction}>
 				<Input name="email" type="email" label="Email:" />
 				<Input name="password" type="password" label="Password:" />
-				<Button type="submit" onPress={logIn}>
-					Log in
-				</Button>
-				<Button type="submit" onPress={signUp}>
+				<Button type="submit">Log in</Button>
+				<Button type="submit" formAction={signUpAction}>
 					Sign up
 				</Button>
 			</Form>
