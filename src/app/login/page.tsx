@@ -1,5 +1,5 @@
-import { Button } from "@heroui/button";
+import { LoginForm } from "@/modules/auth/login-form";
 
 export default function LoginPage() {
-	return <Button>LoginPage</Button>;
+	return <LoginForm />;
 }

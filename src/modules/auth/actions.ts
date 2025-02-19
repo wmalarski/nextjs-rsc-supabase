@@ -52,7 +52,7 @@ export const signUpAction = async (
 				return parseAuthError(error);
 			}
 
-			redirect(paths.home);
+			redirect(paths.login);
 		},
 	});
 };

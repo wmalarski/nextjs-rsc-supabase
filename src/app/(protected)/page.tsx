@@ -1,5 +1,9 @@
-import { Button } from "@heroui/button";
+import { createClient } from "@/modules/supabase/server-action";
 
-export default function Home() {
-	return <Button>Hello</Button>;
+export default async function Home() {
+	const client = await createClient();
+
+	const user = await client.auth.getUser();
+
+	return <pre>{JSON.stringify(user, null, 2)}</pre>;
 }
