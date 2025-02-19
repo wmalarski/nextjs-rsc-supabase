@@ -1,3 +1,4 @@
+import { SignOutForm } from "@/modules/auth/sign-out-form";
 import { createClient } from "@/modules/supabase/server-action";
 
 export default async function Home() {
@@ -5,5 +6,10 @@ export default async function Home() {
 
 	const user = await client.auth.getUser();
 
-	return <pre>{JSON.stringify(user, null, 2)}</pre>;
+	return (
+		<>
+			{user ? <SignOutForm /> : null}
+			<pre>{JSON.stringify(user, null, 2)}</pre>
+		</>
+	);
 }

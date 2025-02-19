@@ -10,16 +10,15 @@ import { loginAction } from "./actions";
 import { AuthFields } from "./auth-fields";
 
 export const LoginForm = () => {
-	const [loginState, loginFormAction, loginPending] = useActionState(
-		loginAction,
-		{ success: false },
-	);
+	const [state, formAction, pending] = useActionState(loginAction, {
+		success: false,
+	});
 
 	return (
 		<main>
-			<Form action={loginFormAction}>
-				<AuthFields formState={loginState} />
-				<Button isLoading={loginPending} type="submit">
+			<Form action={formAction}>
+				<AuthFields formState={state} />
+				<Button isLoading={pending} type="submit">
 					Log In
 				</Button>
 				<Link as={NextLink} href={paths.signUp}>
