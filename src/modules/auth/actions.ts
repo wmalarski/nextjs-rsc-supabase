@@ -1,13 +1,20 @@
 "use server";
 
-import { handleAction, parseAuthError } from "@/utils/actions";
+import {
+	type ActionResult,
+	handleAction,
+	parseAuthError,
+} from "@/utils/actions";
 import { paths } from "@/utils/paths";
 import { decode } from "decode-formdata";
 import { redirect } from "next/navigation";
 import * as v from "valibot";
 import { createClient } from "../supabase/server-action";
 
-export const loginAction = async (formData: FormData) => {
+export const loginAction = async (
+	_previous: ActionResult,
+	formData: FormData,
+) => {
 	return handleAction({
 		data: decode(formData),
 		schema: v.object({
@@ -27,7 +34,10 @@ export const loginAction = async (formData: FormData) => {
 	});
 };
 
-export const signUpAction = async (formData: FormData) => {
+export const signUpAction = async (
+	_previous: ActionResult,
+	formData: FormData,
+) => {
 	return handleAction({
 		data: decode(formData),
 		schema: v.object({
