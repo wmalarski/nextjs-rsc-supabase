@@ -15,16 +15,14 @@ export const SignUpForm = () => {
 	});
 
 	return (
-		<main>
-			<Form action={formAction}>
-				<AuthFields formState={state} />
-				<Button isLoading={pending} type="submit">
-					Sign Up
-				</Button>
-				<Link as={NextLink} href={paths.login}>
-					Log In
-				</Link>
-			</Form>
-		</main>
+		<Form action={formAction}>
+			<AuthFields formState={state} />
+			<Button isLoading={pending} type="submit">
+				Sign Up
+			</Button>
+			<Link as={NextLink} href={paths.login}>
+				Log In
+			</Link>
+		</Form>
 	);
 };
