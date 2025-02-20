@@ -1,7 +1,11 @@
 import type { PropsWithChildren } from "react";
+import { ContentNavbar } from "./content-navbar";
 
-type ContentPageLayoutProps = PropsWithChildren;
-
-export const ContentPageLayout = ({ children }: ContentPageLayoutProps) => {
-	return <main>{children}</main>;
+export const ContentPageLayout = ({ children }: PropsWithChildren) => {
+	return (
+		<div>
+			<ContentNavbar />
+			<main>{children}</main>
+		</div>
+	);
 };
