@@ -1,8 +1,5 @@
-import { paths } from "@/utils/paths";
-import { Link } from "@heroui/link";
 import { HeroUIProvider } from "@heroui/system";
 import type { Metadata } from "next";
-import NextLink from "next/link";
 import type { PropsWithChildren } from "react";
 import "./globals.css";
 
@@ -15,20 +12,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en" className="dark">
 			<body className="h-screen">
-				<HeroUIProvider>
-					<nav className="flex gap-4">
-						<Link as={NextLink} href={paths.login}>
-							Login
-						</Link>
-						<Link as={NextLink} href={paths.signUp}>
-							Sign Up
-						</Link>
-						<Link as={NextLink} href={paths.home}>
-							Home
-						</Link>
-					</nav>
-					{children}
-				</HeroUIProvider>
+				<HeroUIProvider>{children}</HeroUIProvider>
 			</body>
 		</html>
 	);
