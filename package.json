@@ -10,35 +10,32 @@
 		"tsc": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@heroui/button": "^2.2.10",
-		"@heroui/form": "^2.1.9",
-		"@heroui/input": "^2.4.10",
+		"@heroui/button": "^2.2.13",
+		"@heroui/form": "^2.1.12",
+		"@heroui/input": "^2.4.13",
 		"@heroui/link": "^2.2.11",
 		"@heroui/navbar": "^2.2.12",
-		"@heroui/system": "^2.4.7",
-		"@heroui/theme": "^2.4.6",
+		"@heroui/system": "^2.4.10",
+		"@heroui/theme": "^2.4.9",
 		"@supabase/ssr": "^0.5.2",
-		"@supabase/supabase-js": "^2.48.1",
+		"@supabase/supabase-js": "^2.49.1",
 		"decode-formdata": "^0.8.0",
-		"framer-motion": "^12.4.3",
+		"framer-motion": "^12.4.7",
 		"next": "15.1.7",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
-		"valibot": "1.0.0-rc.0"
+		"valibot": "^1.0.0-rc.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@types/node": "^22.13.4",
-		"@types/react": "^19.0.9",
-		"@types/react-dom": "^19.0.3",
-		"postcss": "^8.5.2",
-		"tailwindcss": "^3.4.1",
+		"@types/node": "^22.13.5",
+		"@types/react": "^19.0.10",
+		"@types/react-dom": "^19.0.4",
+		"postcss": "^8.5.3",
+		"tailwindcss": "^3.4.17",
 		"typescript": "^5.7.3"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"sharp"
-		]
+		"onlyBuiltDependencies": ["@biomejs/biome", "sharp"]
 	}
 }
