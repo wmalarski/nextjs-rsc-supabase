@@ -3,7 +3,7 @@ import { createClient } from "@/modules/supabase/server-action";
 import { paths } from "@/utils/paths";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+export default async function History() {
 	const client = await createClient();
 
 	const user = await getUser(client);
