@@ -58,12 +58,9 @@ export const signUpAction = async (
 };
 
 export const signOutAction = async () => {
-	console.log("signOutAction");
 	const supabase = await createClient();
 
 	const { error } = await supabase.auth.signOut();
-
-	console.log("signOutAction", error);
 
 	if (error) {
 		return parseAuthError(error);

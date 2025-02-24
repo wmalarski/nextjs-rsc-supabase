@@ -18,21 +18,36 @@ export const ContentNavbar = async () => {
 		<Navbar>
 			<NavbarBrand>
 				<BookmarkIcon />
-				<p className="font-bold text-inherit">Bookmarks</p>
+				<p className="pl-2 font-bold text-inherit">Bookmarks</p>
 			</NavbarBrand>
-			<NavbarContent className="hidden gap-4 sm:flex" justify="center">
-				<ContentNavbarItem href={paths.home}>
-					<Link as={NextLink} color="foreground" href={paths.home}>
-						Home
-					</Link>
-				</ContentNavbarItem>
-			</NavbarContent>
+			{isAuthorized ? <MainContent /> : null}
 			{isAuthorized ? <AuthorizedContent /> : <UnauthorizedContent />}
 		</Navbar>
 	);
 };
 
-const AuthorizedContent = () => {
+const MainContent = async () => {
+	const links = [
+		{ href: paths.home, label: "Home" },
+		{ href: paths.tags, label: "Tags" },
+		{ href: paths.share, label: "Share" },
+		{ href: paths.history, label: "History" },
+	];
+
+	return (
+		<NavbarContent className="hidden gap-4 sm:flex" justify="center">
+			{links.map((link) => (
+				<ContentNavbarItem key={link.href} href={link.href}>
+					<Link as={NextLink} color="foreground" href={link.href}>
+						{link.label}
+					</Link>
+				</ContentNavbarItem>
+			))}
+		</NavbarContent>
+	);
+};
+
+const UnauthorizedContent = () => {
 	return (
 		<NavbarContent justify="end">
 			<ContentNavbarItem href={paths.login} className="hidden lg:flex">
@@ -54,7 +69,7 @@ const AuthorizedContent = () => {
 	);
 };
 
-const UnauthorizedContent = () => {
+const AuthorizedContent = () => {
 	return (
 		<NavbarContent justify="end">
 			<NavbarItem>

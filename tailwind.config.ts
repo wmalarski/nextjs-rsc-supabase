@@ -1,13 +1,14 @@
-import {heroui} from '@heroui/theme';
+import { heroui } from "@heroui/theme";
 import type { Config } from "tailwindcss";
 
 export default {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/components/(button|form|input|link|navbar|ripple|spinner).js"
-  ],
+	content: [
+		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/modules/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+		"./node_modules/@heroui/theme/dist/components/(button|form|input|link|navbar|ripple|spinner).js",
+	],
 	theme: {
 		extend: {
 			colors: {
@@ -16,5 +17,5 @@ export default {
 			},
 		},
 	},
-  plugins: [heroui()],
+	plugins: [heroui()],
 } satisfies Config;

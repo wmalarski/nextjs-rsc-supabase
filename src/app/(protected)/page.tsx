@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
 	const client = await createClient();
+
 	const user = await getUser(client);
 
 	if (!user) {
