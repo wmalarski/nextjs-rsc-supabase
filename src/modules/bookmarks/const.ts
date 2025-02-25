@@ -1,0 +1,1 @@
+export const SELECT_BOOKMARKS_DEFAULT_LIMIT = 20;
