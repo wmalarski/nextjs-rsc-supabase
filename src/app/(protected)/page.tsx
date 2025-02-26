@@ -1,16 +1,16 @@
-import { getUser } from "@/modules/auth/services";
+import { getRequiredUser } from "@/modules/auth/services";
+import { BookmarksClient } from "@/modules/bookmarks/bookmarks-client";
 import { createClient } from "@/modules/supabase/server-action";
-import { paths } from "@/utils/paths";
-import { redirect } from "next/navigation";
 
 export default async function Home() {
 	const client = await createClient();
+	const user = await getRequiredUser(client);
 
-	const user = await getUser(client);
-
-	if (!user) {
-		redirect(paths.login);
-	}
-
-	return <pre>{JSON.stringify(user, null, 2)}</pre>;
+	return (
+		<div>
+			<h2>Server</h2>
+			<pre>{JSON.stringify(user, null, 2)}</pre>
+			<BookmarksClient />
+		</div>
+	);
 }

@@ -39,7 +39,7 @@ export const BookmarkList = ({
 					<BookmarkLazy key={offset} offset={offset} queryArgs={queryArgs} />
 				))}
 			</BookmarkListContainer>
-			<Button size="sm" color="secondary" onClick={onLoadMoreClick}>
+			<Button size="sm" color="secondary" onPress={onLoadMoreClick}>
 				Load More
 			</Button>
 		</div>
