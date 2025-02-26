@@ -1,8 +1,8 @@
 import { Button } from "@heroui/button";
 import { Skeleton } from "@heroui/skeleton";
 import { type PropsWithChildren, Suspense, useState } from "react";
-import type { BookmarkWithTagsModel, SelectBookmarksArgs } from "../server";
 import { SELECT_BOOKMARKS_DEFAULT_LIMIT } from "./const";
+import type { BookmarkWithTagsModel, SelectBookmarksArgs } from "./server";
 import type { FiltersSearchParams } from "./utils";
 
 type BookmarkListProps = {

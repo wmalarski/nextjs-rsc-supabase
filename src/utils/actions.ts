@@ -1,4 +1,4 @@
-import type { AuthError } from "@supabase/supabase-js";
+import type { AuthError, PostgrestError } from "@supabase/supabase-js";
 import * as v from "valibot";
 
 export const createRequestError = (): ActionResult => {
@@ -38,6 +38,20 @@ export const parseAuthError = (error: AuthError): ActionResult => {
 	return {
 		error: error.message,
 		success: false,
+	};
+};
+
+export const parsePostgrestError = (error: PostgrestError): ActionResult => {
+	return {
+		error: error.message,
+		success: false,
+	};
+};
+
+export const createSucccesResult = <T>(data: T): SuccessResult<T> => {
+	return {
+		data,
+		success: true,
 	};
 };
 
