@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 	const user = await getUser(client);
 
 	return (
-		<UserContextProvider user={user.data.user}>
+		<UserContextProvider user={user}>
 			<html lang="en" className="dark">
 				<body className="h-screen">
 					<HeroUIProvider>{children}</HeroUIProvider>

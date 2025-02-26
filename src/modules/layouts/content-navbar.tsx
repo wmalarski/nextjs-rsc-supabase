@@ -12,7 +12,7 @@ import { ContentNavbarItem } from "./content-navbar-item";
 export const ContentNavbar = async () => {
 	const client = await createClient();
 	const user = await getUser(client);
-	const isAuthorized = !!user.data.user;
+	const isAuthorized = !!user;
 
 	return (
 		<Navbar>

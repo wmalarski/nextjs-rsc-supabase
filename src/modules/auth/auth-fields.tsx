@@ -15,12 +15,14 @@ export const AuthFields = ({ formState }: AuthFieldsProps) => {
 				name="email"
 				type="email"
 				label="Email:"
+				placeholder="Email"
 				errorMessage={errorState?.errors?.email}
 			/>
 			<Input
 				name="password"
 				type="password"
 				label="Password:"
+				placeholder="Password"
 				errorMessage={errorState?.errors?.password}
 			/>
 		</div>

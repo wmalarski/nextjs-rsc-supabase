@@ -3,19 +3,13 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 
-export const getUser = cache((client: SupabaseClient) => {
-	try {
-		throw new Error();
-	} catch (error) {
-		const typed = error as Error;
-		console.log("GET USER", typed.stack?.split("\n").slice(3, 4).join("\n"));
-	}
-
-	return client.auth.getUser();
+export const getUser = cache(async (client: SupabaseClient) => {
+	const userResponse = await client.auth.getUser();
+	return userResponse.data.user;
 });
 
-export const getRequiredUser = (client: SupabaseClient) => {
-	const user = getUser(client);
+export const getRequiredUser = async (client: SupabaseClient) => {
+	const user = await getUser(client);
 
 	if (!user) {
 		redirect(paths.login);
