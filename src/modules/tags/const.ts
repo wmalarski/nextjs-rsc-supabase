@@ -1,0 +1,1 @@
+export const SELECT_TAGS_DEFAULT_LIMIT = 20;
