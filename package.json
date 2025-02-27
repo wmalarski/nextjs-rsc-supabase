@@ -22,10 +22,10 @@
 		"@supabase/supabase-js": "^2.49.1",
 		"decode-formdata": "^0.8.0",
 		"framer-motion": "^12.4.7",
-		"next": "15.1.7",
+		"next": "15.2.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
-		"valibot": "^1.0.0-rc.1"
+		"valibot": "^1.0.0-rc.2"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
@@ -37,9 +37,6 @@
 		"typescript": "^5.7.3"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"sharp"
-		]
+		"onlyBuiltDependencies": ["@biomejs/biome", "sharp"]
 	}
 }
