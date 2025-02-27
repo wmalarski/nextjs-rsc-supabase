@@ -7,7 +7,7 @@ export default {
     "./src/modules/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/components/(button|form|input|link|navbar|skeleton|ripple|spinner).js"
+    "./node_modules/@heroui/theme/dist/components/(button|card|form|input|link|modal|navbar|skeleton|ripple|spinner).js"
   ],
 	theme: {
 		extend: {
