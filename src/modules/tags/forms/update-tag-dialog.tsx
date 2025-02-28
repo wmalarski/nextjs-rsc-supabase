@@ -1,16 +1,18 @@
+import type { TagModel } from "../services";
+
 type UpdateTagDialogProps = {
 	tag: TagModel;
 };
 
-export const UpdateTagDialog: Component<UpdateTagDialogProps> = (props) => {
+export const UpdateTagDialog = ({ tag }: UpdateTagDialogProps) => {
 	const { t } = useI18n();
 
-	const dialogId = createMemo(() => `update-dialog-${props.tag.id}`);
-	const formId = createMemo(() => `update-form-${props.tag.id}`);
+	const dialogId = createMemo(() => `update-dialog-${tag.id}`);
+	const formId = createMemo(() => `update-form-${tag.id}`);
 
 	const submission = useSubmission(
 		updateTagAction,
-		([form]) => form.get("tagId") === String(props.tag.id),
+		([form]) => form.get("tagId") === String(tag.id),
 	);
 
 	const onSubmit = useActionOnSubmit({
@@ -21,14 +23,14 @@ export const UpdateTagDialog: Component<UpdateTagDialogProps> = (props) => {
 	return (
 		<>
 			<DialogTrigger for={dialogId()} size="sm" color="secondary">
-				<PencilIcon class="size-4" />
+				<PencilIcon className="size-4" />
 				{t("common.update")}
 			</DialogTrigger>
 			<Dialog id={dialogId()}>
 				<DialogBox>
 					<DialogTitle>{t("common.update")}</DialogTitle>
 					<form id={formId()} onSubmit={onSubmit}>
-						<input type="hidden" value={props.tag.id} name="tagId" />
+						<input type="hidden" value={tag.id} name="tagId" />
 						<TagFields
 							pending={submission.pending}
 							result={

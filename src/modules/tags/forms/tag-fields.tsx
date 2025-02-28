@@ -1,4 +1,3 @@
-import type { Component } from "solid-js";
 import { useI18n } from "~/modules/common/contexts/i18n";
 import type { RpcFailure } from "~/modules/common/server/helpers";
 import { FieldError } from "~/ui/field-error/field-error";
@@ -12,36 +11,36 @@ import type { TagModel } from "../server";
 export type TagFieldsData = Pick<TagModel, "name">;
 
 type TagFieldsProps = {
-  initialData?: TagFieldsData;
-  pending?: boolean;
-  result?: RpcFailure;
+	initialData?: TagFieldsData;
+	pending?: boolean;
+	result?: RpcFailure;
 };
 
-export const TagFields: Component<TagFieldsProps> = (props) => {
-  const { t } = useI18n();
+export const TagFields = ({ initialData, pending, result }: TagFieldsProps) => {
+	const { t } = useI18n();
 
-  return (
-    <div class="flex flex-col gap-4">
-      <FormError message={props.result?.error} />
+	return (
+		<div className="flex flex-col gap-4">
+			<FormError message={result?.error} />
 
-      <FormControl>
-        <Label for="name">
-          <LabelText>{t("tags.form.name")}</LabelText>
-        </Label>
-        <TextFieldInput
-          id="name"
-          name="name"
-          placeholder={t("tags.form.name")}
-          value={props.initialData?.name}
-          disabled={props.pending}
-          variant="bordered"
-          {...getInvalidStateProps({
-            errorMessageId: "name-error",
-            isInvalid: !!props.result?.errors?.name,
-          })}
-        />
-        <FieldError id="name-error" message={props.result?.errors?.name} />
-      </FormControl>
-    </div>
-  );
+			<FormControl>
+				<Label for="name">
+					<LabelText>{t("tags.form.name")}</LabelText>
+				</Label>
+				<TextFieldInput
+					id="name"
+					name="name"
+					placeholder={t("tags.form.name")}
+					value={initialData?.name}
+					disabled={pending}
+					variant="bordered"
+					{...getInvalidStateProps({
+						errorMessageId: "name-error",
+						isInvalid: !!result?.errors?.name,
+					})}
+				/>
+				<FieldError id="name-error" message={result?.errors?.name} />
+			</FormControl>
+		</div>
+	);
 };

@@ -1,4 +1,3 @@
-import type { Component } from "solid-js";
 import { useI18n } from "~/modules/common/contexts/i18n";
 import type { RpcFailure } from "~/modules/common/server/helpers";
 import { Checkbox } from "~/ui/checkbox/checkbox";
@@ -11,76 +10,80 @@ import { getInvalidStateProps } from "~/ui/utils/get-invalid-state-props";
 import type { BookmarkWithTagsModel } from "../server";
 
 type CompleteFieldsProps = {
-  initialData?: BookmarkWithTagsModel;
-  pending?: boolean;
-  result?: RpcFailure;
+	initialData?: BookmarkWithTagsModel;
+	pending?: boolean;
+	result?: RpcFailure;
 };
 
-export const CompleteFields: Component<CompleteFieldsProps> = (props) => {
-  const { t } = useI18n();
+export const CompleteFields = ({
+	initialData,
+	pending,
+	result,
+}: CompleteFieldsProps) => {
+	const { t } = useI18n();
 
-  return (
-    <div class="flex flex-col gap-4">
-      <FormError message={props.result?.error} />
+	return (
+		<div className="flex flex-col gap-4">
+			<FormError message={result?.error} />
 
-      <FormControl direction="horizontal">
-        <Checkbox
-          id="done"
-          name="done"
-          checked={props.initialData?.done}
-          disabled={props.pending}
-          {...getInvalidStateProps({
-            errorMessageId: "title-error",
-            isInvalid: !!props.result?.errors?.done,
-          })}
-        />
-        <Label for="done">
-          <LabelText>{t("bookmarks.complete.done")}</LabelText>
-        </Label>
-        <FieldError id="done-error" message={props.result?.errors?.done} />
-      </FormControl>
+			<FormControl direction="horizontal">
+				<Checkbox
+					id="done"
+					name="done"
+					checked={initialData?.done}
+					disabled={pending}
+					{...getInvalidStateProps({
+						errorMessageId: "title-error",
+						isInvalid: !!result?.errors?.done,
+					})}
+				/>
+				<Label for="done">
+					<LabelText>{t("bookmarks.complete.done")}</LabelText>
+				</Label>
+				<FieldError id="done-error" message={result?.errors?.done} />
+			</FormControl>
 
-      <FormControl>
-        <Label for="rate">
-          <LabelText>{t("bookmarks.complete.rate")}</LabelText>
-        </Label>
-        <TextFieldInput
-          id="rate"
-          name="rate"
-          placeholder={t("bookmarks.complete.rate")}
-          type="number"
-          min={0}
-          max={10}
-          step={0.1}
-          value={props.initialData?.rate ?? 5}
-          disabled={props.pending}
-          variant="bordered"
-          {...getInvalidStateProps({
-            errorMessageId: "rate-error",
-            isInvalid: !!props.result?.errors?.rate,
-          })}
-        />
-        <FieldError id="text-error" message={props.result?.errors?.text} />
-      </FormControl>
+			<FormControl>
+				<Label for="rate">
+					<LabelText>{t("bookmarks.complete.rate")}</LabelText>
+				</Label>
+				<TextFieldInput
+					id="rate"
+					name="rate"
+					placeholder={t("bookmarks.complete.rate")}
+					type="number"
+					min={0}
+					max={10}
+					step={0.1}
+					value={initialData?.rate ?? 5}
+					disabled={pending}
+					variant="bordered"
+					{...getInvalidStateProps({
+						errorMessageId: "rate-error",
+						isInvalid: !!result?.errors?.rate,
+					})}
+				/>
+				<FieldError id="text-error" message={result?.errors?.text} />
+			</FormControl>
 
-      <FormControl>
-        <Label for="note">
-          <LabelText>{t("bookmarks.complete.note")}</LabelText>
-        </Label>
-        <TextFieldInput
-          id="note"
-          name="note"
-          placeholder={t("bookmarks.complete.note")}
-          value={props.initialData?.note ?? ""}
-          disabled={props.pending}
-          variant="bordered"
-          {...getInvalidStateProps({
-            errorMessageId: "note-error",
-            isInvalid: !!props.result?.errors?.note,
-          })}
-        />
-        <FieldError id="url-note" message={props.result?.errors?.note} />
-      </FormControl>
-    </div>
-  );
+			<FormControl>
+				<Label for="note">
+					<LabelText>{t("bookmarks.complete.note")}</LabelText>
+				</Label>
+				<TextFieldInput
+					id="note"
+					name="note"
+					placeholder={t("bookmarks.complete.note")}
+					value={initialData?.note ?? ""}
+					disabled={pending}
+					variant="bordered"
+					{...getInvalidStateProps({
+						errorMessageId: "note-error",
+						isInvalid: !!result?.errors?.note,
+					})}
+				/>
+				<FieldError id="url-note" message={result?.errors?.note} />
+			</FormControl>
+		</div>
+	);
 };
