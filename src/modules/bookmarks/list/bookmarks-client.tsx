@@ -1,6 +1,6 @@
 "use client";
 
-import { useRequiredUserContext } from "../auth/user-context";
+import { useRequiredUserContext } from "../../auth/user-context";
 
 export const BookmarksClient = () => {
 	const user = useRequiredUserContext();

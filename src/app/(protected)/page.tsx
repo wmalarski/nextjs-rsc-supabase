@@ -1,5 +1,5 @@
 import { getRequiredUser } from "@/modules/auth/services";
-import { BookmarksClient } from "@/modules/bookmarks/bookmarks-client";
+import { BookmarksClient } from "@/modules/bookmarks/list/bookmarks-client";
 import { createClient } from "@/modules/supabase/server-action";
 
 export default async function Home() {
