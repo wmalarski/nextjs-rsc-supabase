@@ -1,5 +1,6 @@
 import { createAsync } from "@solidjs/router";
-import { For, Suspense, createMemo } from "solid-js";
+import { useMemo } from "react";
+
 import { RpcShow } from "~/modules/common/components/rpc-show";
 import { selectTagsQuery } from "~/modules/tags/client";
 import { Checkbox } from "~/ui/checkbox/checkbox";
@@ -19,9 +20,9 @@ export const BookmarkTagsField = ({
 }: BookmarkTagsFieldProps) => {
 	const tags = createAsync(() => selectTagsQuery({}));
 
-	const initialTagIds = createMemo(() => {
+	const initialTagIds = useMemo(() => {
 		return new Set(initialTags);
-	});
+	}, [initialTags]);
 
 	return (
 		<Suspense>
@@ -39,7 +40,7 @@ export const BookmarkTagsField = ({
 												id={id}
 												type="checkbox"
 												value={tag.id}
-												checked={initialTagIds().has(tag.id)}
+												checked={initialTagIds.has(tag.id)}
 												name="tags[]"
 												disabled={disabled}
 											/>

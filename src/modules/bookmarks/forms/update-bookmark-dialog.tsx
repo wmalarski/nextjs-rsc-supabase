@@ -1,6 +1,5 @@
 import { useSubmission } from "@solidjs/router";
 import { useId } from "react";
-import { useI18n } from "~/modules/common/contexts/i18n";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
 import { Button } from "~/ui/button/button";
 import {
@@ -25,8 +24,6 @@ type UpdateBookmarkDialogProps = {
 export const UpdateBookmarkDialog = ({
 	bookmark,
 }: UpdateBookmarkDialogProps) => {
-	const { t } = useI18n();
-
 	const dialogId = useId();
 	const formId = useId();
 
@@ -62,11 +59,11 @@ export const UpdateBookmarkDialog = ({
 				color="secondary"
 			>
 				<PencilIcon className="size-4" />
-				{t("common.update")}
+				Update
 			</DialogTrigger>
 			<Dialog id={dialogId}>
 				<DialogBox>
-					<DialogTitle>{t("common.update")}</DialogTitle>
+					<DialogTitle>Update</DialogTitle>
 					<form id={formId} onSubmit={onSubmit} className="flex flex-col gap-6">
 						<input type="hidden" value={bookmark.id} name="bookmarkId" />
 						<BookmarkFields
@@ -84,7 +81,7 @@ export const UpdateBookmarkDialog = ({
 							isLoading={submission.pending}
 							type="submit"
 						>
-							{t("common.save")}
+							Save
 						</Button>
 					</DialogActions>
 				</DialogBox>

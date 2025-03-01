@@ -6,8 +6,6 @@ type DeleteTagFormProps = {
 };
 
 export const DeleteTagForm = ({ tag }: DeleteTagFormProps) => {
-	const { t } = useI18n();
-
 	const dialogId = useId();
 
 	const submission = useSubmission(
@@ -25,12 +23,12 @@ export const DeleteTagForm = ({ tag }: DeleteTagFormProps) => {
 			<input type="hidden" value={tag.id} name="tagId" />
 			<DialogTrigger for={dialogId} color="error" size="sm">
 				<TrashIcon className="size-4" />
-				{t("common.delete")}
+				Delete
 			</DialogTrigger>
 			<AlertDialog
-				confirm={t("common.delete")}
+				confirm="Delete"
 				confirmColor="error"
-				title={t("common.delete")}
+				title="Delete"
 				pending={submission.pending}
 				id={dialogId}
 				errorMessage={

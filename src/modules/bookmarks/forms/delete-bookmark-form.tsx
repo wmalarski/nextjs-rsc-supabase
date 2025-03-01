@@ -1,6 +1,5 @@
 import { useSubmission } from "@solidjs/router";
 import { useId } from "react";
-import { useI18n } from "~/modules/common/contexts/i18n";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
 import { AlertDialog } from "~/ui/alert-dialog/alert-dialog";
 import { DialogTrigger, closeDialog } from "~/ui/dialog/dialog";
@@ -13,8 +12,6 @@ type DeleteBookmarkFormProps = {
 };
 
 export const DeleteBookmarkForm = ({ bookmark }: DeleteBookmarkFormProps) => {
-	const { t } = useI18n();
-
 	const dialogId = useId();
 
 	const submission = useSubmission(
@@ -32,12 +29,12 @@ export const DeleteBookmarkForm = ({ bookmark }: DeleteBookmarkFormProps) => {
 			<input type="hidden" value={bookmark.id} name="bookmarkId" />
 			<DialogTrigger for={dialogId} color="error" size="sm">
 				<TrashIcon className="size-4" />
-				{t("common.delete")}
+				Delete
 			</DialogTrigger>
 			<AlertDialog
-				confirm={t("common.delete")}
+				confirm="Delete"
 				confirmColor="error"
-				title={t("common.delete")}
+				title="Delete"
 				pending={submission.pending}
 				id={dialogId}
 				errorMessage={

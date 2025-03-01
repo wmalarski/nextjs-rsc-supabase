@@ -6,8 +6,6 @@ type UpdateTagDialogProps = {
 };
 
 export const UpdateTagDialog = ({ tag }: UpdateTagDialogProps) => {
-	const { t } = useI18n();
-
 	const dialogId = useId();
 	const formId = useId();
 
@@ -25,11 +23,11 @@ export const UpdateTagDialog = ({ tag }: UpdateTagDialogProps) => {
 		<>
 			<DialogTrigger for={dialogId} size="sm" color="secondary">
 				<PencilIcon className="size-4" />
-				{t("common.update")}
+				Update
 			</DialogTrigger>
 			<Dialog id={dialogId}>
 				<DialogBox>
-					<DialogTitle>{t("common.update")}</DialogTitle>
+					<DialogTitle>Update</DialogTitle>
 					<form id={formId} onSubmit={onSubmit}>
 						<input type="hidden" value={tag.id} name="tagId" />
 						<TagFields
@@ -48,7 +46,7 @@ export const UpdateTagDialog = ({ tag }: UpdateTagDialogProps) => {
 							isLoading={submission.pending}
 							type="submit"
 						>
-							{t("common.save")}
+							Save
 						</Button>
 					</DialogActions>
 				</DialogBox>

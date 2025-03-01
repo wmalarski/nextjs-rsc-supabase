@@ -1,6 +1,5 @@
 import { useSubmission } from "@solidjs/router";
 import { useId } from "react";
-import { useI18n } from "~/modules/common/contexts/i18n";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
 import { Button } from "~/ui/button/button";
 import {
@@ -23,8 +22,6 @@ type CompleteDialogProps = {
 };
 
 export const CompleteDialog = ({ bookmark }: CompleteDialogProps) => {
-	const { t } = useI18n();
-
 	const dialogId = useId();
 	const formId = useId();
 
@@ -50,11 +47,11 @@ export const CompleteDialog = ({ bookmark }: CompleteDialogProps) => {
 		<>
 			<DialogTrigger onClick={onClick} for={dialogId} size="sm" color="primary">
 				<CheckIcon className="size-4" />
-				{t("bookmarks.complete.complete")}
+				Complete
 			</DialogTrigger>
 			<Dialog id={dialogId}>
 				<DialogBox>
-					<DialogTitle>{t("bookmarks.complete.complete")}</DialogTitle>
+					<DialogTitle>Complete</DialogTitle>
 					<form id={formId} onSubmit={onSubmit}>
 						<input type="hidden" value={bookmark.id} name="bookmarkId" />
 						<CompleteFields
@@ -72,7 +69,7 @@ export const CompleteDialog = ({ bookmark }: CompleteDialogProps) => {
 							isLoading={submission.pending}
 							type="submit"
 						>
-							{t("bookmarks.complete.complete")}
+							Complete
 						</Button>
 					</DialogActions>
 				</DialogBox>

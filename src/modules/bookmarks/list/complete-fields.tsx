@@ -1,4 +1,3 @@
-import { useI18n } from "~/modules/common/contexts/i18n";
 import type { RpcFailure } from "~/modules/common/server/helpers";
 import { Checkbox } from "~/ui/checkbox/checkbox";
 import { FieldError } from "~/ui/field-error/field-error";
@@ -20,8 +19,6 @@ export const CompleteFields = ({
 	pending,
 	result,
 }: CompleteFieldsProps) => {
-	const { t } = useI18n();
-
 	return (
 		<div className="flex flex-col gap-4">
 			<FormError message={result?.error} />
@@ -38,19 +35,19 @@ export const CompleteFields = ({
 					})}
 				/>
 				<Label for="done">
-					<LabelText>{t("bookmarks.complete.done")}</LabelText>
+					<LabelText>Done</LabelText>
 				</Label>
 				<FieldError id="done-error" message={result?.errors?.done} />
 			</FormControl>
 
 			<FormControl>
 				<Label for="rate">
-					<LabelText>{t("bookmarks.complete.rate")}</LabelText>
+					<LabelText>Rate</LabelText>
 				</Label>
 				<TextFieldInput
 					id="rate"
 					name="rate"
-					placeholder={t("bookmarks.complete.rate")}
+					placeholder="Rate"
 					type="number"
 					min={0}
 					max={10}
@@ -68,12 +65,12 @@ export const CompleteFields = ({
 
 			<FormControl>
 				<Label for="note">
-					<LabelText>{t("bookmarks.complete.note")}</LabelText>
+					<LabelText>Note</LabelText>
 				</Label>
 				<TextFieldInput
 					id="note"
 					name="note"
-					placeholder={t("bookmarks.complete.note")}
+					placeholder="Note"
 					value={initialData?.note ?? ""}
 					disabled={pending}
 					variant="bordered"

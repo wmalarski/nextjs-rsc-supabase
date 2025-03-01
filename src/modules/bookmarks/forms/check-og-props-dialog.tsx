@@ -1,5 +1,4 @@
-import { Show, createSignal } from "solid-js";
-import { useI18n } from "~/modules/common/contexts/i18n";
+import { useState } from "react";
 import { createIsLink } from "~/modules/common/utils/create-is-link";
 import { Button } from "~/ui/button/button";
 import { getOgPropsQuery } from "../client";
@@ -14,11 +13,9 @@ export const CheckOgPropsDialog = ({
 	onCheck,
 	value,
 }: CheckOgPropsDialogProps) => {
-	const { t } = useI18n();
-
 	const isLink = createIsLink(() => value);
 
-	const [isPending, setIsPending] = createSignal(false);
+	const [isPending, setIsPending] = useState(false);
 
 	const onCheckClick = async () => {
 		setIsPending(true);
@@ -39,18 +36,20 @@ export const CheckOgPropsDialog = ({
 		setIsPending(false);
 	};
 
+	if (!isLink()) {
+		return null;
+	}
+
 	return (
-		<Show when={isLink()}>
-			<Button
-				type="button"
-				color="secondary"
-				size="xs"
-				onClick={onCheckClick}
-				isLoading={isPending()}
-				disabled={isPending()}
-			>
-				{t("bookmarks.form.check")}
-			</Button>
-		</Show>
+		<Button
+			type="button"
+			color="secondary"
+			size="xs"
+			onClick={onCheckClick}
+			isLoading={isPending}
+			disabled={isPending}
+		>
+			OG Check
+		</Button>
 	);
 };

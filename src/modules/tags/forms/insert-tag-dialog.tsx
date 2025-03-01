@@ -1,6 +1,5 @@
 import { useSubmission } from "@solidjs/router";
 import { useId } from "react";
-import { useI18n } from "~/modules/common/contexts/i18n";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
 import { Button } from "~/ui/button/button";
 import {
@@ -18,8 +17,6 @@ import { insertTagAction } from "../client";
 import { TagFields } from "./tag-fields";
 
 export const InsertTagDialog = () => {
-	const { t } = useI18n();
-
 	const dialogId = useId();
 	const formId = useId();
 
@@ -35,11 +32,11 @@ export const InsertTagDialog = () => {
 		<>
 			<DialogTrigger color="primary" for={dialogId} size="sm">
 				<PlusIcon className="size-4" />
-				{t("tags.form.add")}
+				Add tag
 			</DialogTrigger>
 			<Dialog id={dialogId}>
 				<DialogBox>
-					<DialogTitle>{t("tags.form.add")}</DialogTitle>
+					<DialogTitle>Add tag</DialogTitle>
 					<form id={formId} onSubmit={onSubmit}>
 						<TagFields
 							pending={submission.pending}
@@ -57,7 +54,7 @@ export const InsertTagDialog = () => {
 							isLoading={submission.pending}
 							type="submit"
 						>
-							{t("common.save")}
+							Save
 						</Button>
 					</DialogActions>
 				</DialogBox>

@@ -1,4 +1,3 @@
-import { useI18n } from "~/modules/common/contexts/i18n";
 import type { RpcFailure } from "~/modules/common/server/helpers";
 import { FieldError } from "~/ui/field-error/field-error";
 import { FormControl } from "~/ui/form-control/form-control";
@@ -17,20 +16,18 @@ type TagFieldsProps = {
 };
 
 export const TagFields = ({ initialData, pending, result }: TagFieldsProps) => {
-	const { t } = useI18n();
-
 	return (
 		<div className="flex flex-col gap-4">
 			<FormError message={result?.error} />
 
 			<FormControl>
 				<Label for="name">
-					<LabelText>{t("tags.form.name")}</LabelText>
+					<LabelText>Name</LabelText>
 				</Label>
 				<TextFieldInput
 					id="name"
 					name="name"
-					placeholder={t("tags.form.name")}
+					placeholder="Name"
 					value={initialData?.name}
 					disabled={pending}
 					variant="bordered"

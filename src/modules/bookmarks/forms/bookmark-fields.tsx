@@ -1,5 +1,4 @@
 import { type PropsWithChildren, useRef } from "react";
-import { useI18n } from "~/modules/common/contexts/i18n";
 import type { RpcFailure } from "~/modules/common/server/helpers";
 import { FieldError } from "~/ui/field-error/field-error";
 import { FormControl } from "~/ui/form-control/form-control";
@@ -29,8 +28,6 @@ export const BookmarkFields = ({
 	pending,
 	result,
 }: BookmarkFieldsProps) => {
-	const { t } = useI18n();
-
 	const titleRef = useRef<HTMLInputElement>(null);
 	const urlRef = useRef<HTMLInputElement>(null);
 	const previewRef = useRef<HTMLInputElement>(null);
@@ -58,7 +55,7 @@ export const BookmarkFields = ({
 			<FormControl>
 				<LabelRow>
 					<Label for="title">
-						<LabelText>{t("bookmarks.form.title")}</LabelText>
+						<LabelText>Title</LabelText>
 					</Label>
 					<CheckOgPropsDialog
 						value={initialData?.title}
@@ -68,7 +65,7 @@ export const BookmarkFields = ({
 				<TextFieldInput
 					id="title"
 					name="title"
-					placeholder={t("bookmarks.form.title")}
+					placeholder="Title"
 					value={initialData?.title}
 					disabled={pending}
 					variant="bordered"
@@ -84,7 +81,7 @@ export const BookmarkFields = ({
 			<FormControl>
 				<LabelRow>
 					<Label for="text">
-						<LabelText>{t("bookmarks.form.text")}</LabelText>
+						<LabelText>Text</LabelText>
 					</Label>
 					<CheckOgPropsDialog
 						value={initialData?.text}
@@ -94,7 +91,7 @@ export const BookmarkFields = ({
 				<TextFieldInput
 					id="text"
 					name="text"
-					placeholder={t("bookmarks.form.text")}
+					placeholder="Text"
 					value={initialData?.text}
 					disabled={pending}
 					variant="bordered"
@@ -109,7 +106,7 @@ export const BookmarkFields = ({
 			<FormControl>
 				<LabelRow>
 					<Label for="url">
-						<LabelText>{t("bookmarks.form.url")}</LabelText>
+						<LabelText>Url</LabelText>
 					</Label>
 					<CheckOgPropsDialog
 						value={initialData?.url}
@@ -119,7 +116,7 @@ export const BookmarkFields = ({
 				<TextFieldInput
 					id="url"
 					name="url"
-					placeholder={t("bookmarks.form.url")}
+					placeholder="Url"
 					value={initialData?.url}
 					disabled={pending}
 					variant="bordered"
@@ -135,7 +132,7 @@ export const BookmarkFields = ({
 			<FormControl>
 				<LabelRow>
 					<Label for="preview">
-						<LabelText>{t("bookmarks.form.preview")}</LabelText>
+						<LabelText>Preview</LabelText>
 					</Label>
 					<CheckOgPropsDialog
 						value={initialData?.preview ?? undefined}
@@ -145,7 +142,7 @@ export const BookmarkFields = ({
 				<TextFieldInput
 					id="preview"
 					name="preview"
-					placeholder={t("bookmarks.form.preview")}
+					placeholder="Preview"
 					value={initialData?.preview ?? undefined}
 					disabled={pending}
 					variant="bordered"
