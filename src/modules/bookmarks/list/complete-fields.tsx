@@ -7,7 +7,7 @@ import { FormError } from "~/ui/form-error/form-error";
 import { Label, LabelText } from "~/ui/label/label";
 import { TextFieldInput } from "~/ui/text-field/text-field";
 import { getInvalidStateProps } from "~/ui/utils/get-invalid-state-props";
-import type { BookmarkWithTagsModel } from "../server";
+import type { BookmarkWithTagsModel } from "../services";
 
 type CompleteFieldsProps = {
 	initialData?: BookmarkWithTagsModel;

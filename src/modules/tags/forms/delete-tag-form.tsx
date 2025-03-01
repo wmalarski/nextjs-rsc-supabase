@@ -1,3 +1,4 @@
+import { useId } from "react";
 import type { TagModel } from "../services";
 
 type DeleteTagFormProps = {
@@ -7,7 +8,7 @@ type DeleteTagFormProps = {
 export const DeleteTagForm = ({ tag }: DeleteTagFormProps) => {
 	const { t } = useI18n();
 
-	const dialogId = createMemo(() => `delete-dialog-${tag.id}`);
+	const dialogId = useId();
 
 	const submission = useSubmission(
 		deleteTagAction,
@@ -16,13 +17,13 @@ export const DeleteTagForm = ({ tag }: DeleteTagFormProps) => {
 
 	const onSubmit = useActionOnSubmit({
 		action: deleteTagAction,
-		onSuccess: () => closeDialog(dialogId()),
+		onSuccess: () => closeDialog(dialogId),
 	});
 
 	return (
 		<form onSubmit={onSubmit}>
 			<input type="hidden" value={tag.id} name="tagId" />
-			<DialogTrigger for={dialogId()} color="error" size="sm">
+			<DialogTrigger for={dialogId} color="error" size="sm">
 				<TrashIcon className="size-4" />
 				{t("common.delete")}
 			</DialogTrigger>
@@ -31,7 +32,7 @@ export const DeleteTagForm = ({ tag }: DeleteTagFormProps) => {
 				confirmColor="error"
 				title={t("common.delete")}
 				pending={submission.pending}
-				id={dialogId()}
+				id={dialogId}
 				errorMessage={
 					submission.result?.success ? undefined : submission.result?.error
 				}

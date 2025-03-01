@@ -1,3 +1,4 @@
+import { useId } from "react";
 import type { TagModel } from "../services";
 
 type UpdateTagDialogProps = {
@@ -7,8 +8,8 @@ type UpdateTagDialogProps = {
 export const UpdateTagDialog = ({ tag }: UpdateTagDialogProps) => {
 	const { t } = useI18n();
 
-	const dialogId = createMemo(() => `update-dialog-${tag.id}`);
-	const formId = createMemo(() => `update-form-${tag.id}`);
+	const dialogId = useId();
+	const formId = useId();
 
 	const submission = useSubmission(
 		updateTagAction,
@@ -17,19 +18,19 @@ export const UpdateTagDialog = ({ tag }: UpdateTagDialogProps) => {
 
 	const onSubmit = useActionOnSubmit({
 		action: updateTagAction,
-		onSuccess: () => closeDialog(dialogId()),
+		onSuccess: () => closeDialog(dialogId),
 	});
 
 	return (
 		<>
-			<DialogTrigger for={dialogId()} size="sm" color="secondary">
+			<DialogTrigger for={dialogId} size="sm" color="secondary">
 				<PencilIcon className="size-4" />
 				{t("common.update")}
 			</DialogTrigger>
-			<Dialog id={dialogId()}>
+			<Dialog id={dialogId}>
 				<DialogBox>
 					<DialogTitle>{t("common.update")}</DialogTitle>
-					<form id={formId()} onSubmit={onSubmit}>
+					<form id={formId} onSubmit={onSubmit}>
 						<input type="hidden" value={tag.id} name="tagId" />
 						<TagFields
 							pending={submission.pending}
@@ -41,7 +42,7 @@ export const UpdateTagDialog = ({ tag }: UpdateTagDialogProps) => {
 					<DialogActions>
 						<DialogClose />
 						<Button
-							form={formId()}
+							form={formId}
 							color="primary"
 							disabled={submission.pending}
 							isLoading={submission.pending}

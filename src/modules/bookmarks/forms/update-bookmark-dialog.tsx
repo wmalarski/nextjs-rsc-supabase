@@ -1,5 +1,5 @@
 import { useSubmission } from "@solidjs/router";
-import { createMemo } from "solid-js";
+import { useId } from "react";
 import { useI18n } from "~/modules/common/contexts/i18n";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
 import { Button } from "~/ui/button/button";
@@ -15,7 +15,7 @@ import {
 import { PencilIcon } from "~/ui/icons/pencil-icon";
 import { updateBookmarkAction } from "../client";
 import { useBookmarksHistory } from "../contexts/bookmarks-history";
-import type { BookmarkWithTagsModel } from "../server";
+import type { BookmarkWithTagsModel } from "../services";
 import { BookmarkFields } from "./bookmark-fields";
 
 type UpdateBookmarkDialogProps = {
@@ -27,8 +27,8 @@ export const UpdateBookmarkDialog = ({
 }: UpdateBookmarkDialogProps) => {
 	const { t } = useI18n();
 
-	const dialogId = createMemo(() => `update-dialog-${bookmark.id}`);
-	const formId = createMemo(() => `update-form-${bookmark.id}`);
+	const dialogId = useId();
+	const formId = useId();
 
 	const submission = useSubmission(
 		updateBookmarkAction,
@@ -37,7 +37,7 @@ export const UpdateBookmarkDialog = ({
 
 	const onSubmit = useActionOnSubmit({
 		action: updateBookmarkAction,
-		onSuccess: () => closeDialog(dialogId()),
+		onSuccess: () => closeDialog(dialogId),
 	});
 
 	const initialData = () => {
@@ -57,21 +57,17 @@ export const UpdateBookmarkDialog = ({
 		<>
 			<DialogTrigger
 				onClick={onClick}
-				for={dialogId()}
+				for={dialogId}
 				size="sm"
 				color="secondary"
 			>
 				<PencilIcon className="size-4" />
 				{t("common.update")}
 			</DialogTrigger>
-			<Dialog id={dialogId()}>
+			<Dialog id={dialogId}>
 				<DialogBox>
 					<DialogTitle>{t("common.update")}</DialogTitle>
-					<form
-						id={formId()}
-						onSubmit={onSubmit}
-						className="flex flex-col gap-6"
-					>
+					<form id={formId} onSubmit={onSubmit} className="flex flex-col gap-6">
 						<input type="hidden" value={bookmark.id} name="bookmarkId" />
 						<BookmarkFields
 							initialData={initialData()}
@@ -82,7 +78,7 @@ export const UpdateBookmarkDialog = ({
 					<DialogActions>
 						<DialogClose />
 						<Button
-							form={formId()}
+							form={formId}
 							color="primary"
 							disabled={submission.pending}
 							isLoading={submission.pending}

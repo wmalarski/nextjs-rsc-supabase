@@ -1,5 +1,4 @@
-import type { PropsWithChildren } from "react";
-import { createSignal } from "solid-js";
+import { type PropsWithChildren, useRef } from "react";
 import { useI18n } from "~/modules/common/contexts/i18n";
 import type { RpcFailure } from "~/modules/common/server/helpers";
 import { FieldError } from "~/ui/field-error/field-error";
@@ -32,14 +31,14 @@ export const BookmarkFields = ({
 }: BookmarkFieldsProps) => {
 	const { t } = useI18n();
 
-	const [titleRef, setTitleRef] = createSignal<HTMLInputElement>();
-	const [urlRef, setUrlRef] = createSignal<HTMLInputElement>();
-	const [previewRef, setPreviewRef] = createSignal<HTMLInputElement>();
+	const titleRef = useRef<HTMLInputElement>(null);
+	const urlRef = useRef<HTMLInputElement>(null);
+	const previewRef = useRef<HTMLInputElement>(null);
 
 	const onCheckSubmit = (data: BookmarkFieldsData) => {
-		const titleInput = titleRef();
-		const urlInput = urlRef();
-		const previewInput = previewRef();
+		const titleInput = titleRef.current;
+		const urlInput = urlRef.current;
+		const previewInput = previewRef.current;
 
 		if (data.title && titleInput) {
 			titleInput.value = data.title;
@@ -73,7 +72,7 @@ export const BookmarkFields = ({
 					value={initialData?.title}
 					disabled={pending}
 					variant="bordered"
-					ref={setTitleRef}
+					ref={titleRef}
 					{...getInvalidStateProps({
 						errorMessageId: "title-error",
 						isInvalid: !!result?.errors?.title,
@@ -124,7 +123,7 @@ export const BookmarkFields = ({
 					value={initialData?.url}
 					disabled={pending}
 					variant="bordered"
-					ref={setUrlRef}
+					ref={urlRef}
 					{...getInvalidStateProps({
 						errorMessageId: "url-error",
 						isInvalid: !!result?.errors?.url,
@@ -150,7 +149,7 @@ export const BookmarkFields = ({
 					value={initialData?.preview ?? undefined}
 					disabled={pending}
 					variant="bordered"
-					ref={setPreviewRef}
+					ref={previewRef}
 					{...getInvalidStateProps({
 						errorMessageId: "preview-error",
 						isInvalid: !!result?.errors?.preview,

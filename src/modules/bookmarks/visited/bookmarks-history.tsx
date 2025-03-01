@@ -1,54 +1,86 @@
-import { makePersisted } from "@solid-primitives/storage";
-import type { PropsWithChildren } from "react";
-import { type Accessor, createContext, createMemo, useContext } from "solid-js";
-import { createStore, produce } from "solid-js/store";
+import {
+	type PropsWithChildren,
+	createContext,
+	useContext,
+	useState,
+} from "react";
 
-const createBookmarksHistoryContext = (userId?: string) => {
-	const [ids, setIds] = makePersisted(createStore<number[]>([]), {
-		name: `bookmarks-${userId}`,
-	});
+const getLocalStorageValue = (userId: string) => {
+	if (typeof window === "undefined") {
+		return [];
+	}
+
+	const serialized = localStorage.get(`bookmarks-${userId}`);
+
+	if (!serialized) {
+		return [];
+	}
+
+	const parsed = JSON.parse(serialized);
+
+	return parsed as number[];
+};
+
+const useBookmarksHistoryContext = (userId: string) => {
+	const [ids, setIds] = useState<number[]>(getLocalStorageValue(userId));
 
 	const addToHistory = (id: number) => {
-		setIds(
-			produce((state) => {
-				const index = state.indexOf(id);
+		const newState = [...ids];
+		const index = newState.indexOf(id);
 
-				if (index !== -1) {
-					state.splice(index, 1);
-				}
+		if (index !== -1) {
+			newState.splice(index, 1);
+		}
 
-				state.push(id);
+		newState.push(id);
 
-				if (state.length > 20) {
-					state.splice(0, 1);
-				}
-			}),
-		);
+		if (newState.length > 20) {
+			newState.splice(0, 1);
+		}
+
+		setIds(newState);
 	};
 
 	return { ids, addToHistory };
 };
 
-type BookmarksHistoryContextValue = Accessor<
-	ReturnType<typeof createBookmarksHistoryContext>
+type BookmarksHistoryContextValue = ReturnType<
+	typeof useBookmarksHistoryContext
 >;
 
-const BookmarksHistoryContext = createContext<BookmarksHistoryContextValue>(
-	() => {
-		throw new Error("BookmarksHistoryContext is not defined");
-	},
-);
+const BookmarksHistoryContext =
+	createContext<BookmarksHistoryContextValue | null>(null);
 
-export const BookmarksHistoryProvider = ({ children }: PropsWithChildren) => {
-	const value = createMemo(() => createBookmarksHistoryContext());
+type BookmarksHistoryProviderProps = PropsWithChildren<{
+	userId: string;
+}>;
+
+const Provider = ({ children, userId }: BookmarksHistoryProviderProps) => {
+	const value = useBookmarksHistoryContext(userId);
 
 	return (
-		<BookmarksHistoryContext.Provider value={value}>
+		<BookmarksHistoryContext value={value}>{children}</BookmarksHistoryContext>
+	);
+};
+
+export const BookmarksHistoryProvider = ({
+	children,
+	userId,
+}: BookmarksHistoryProviderProps) => {
+	const key = `${userId}-${typeof window}`;
+	return (
+		<Provider key={key} userId={userId}>
 			{children}
-		</BookmarksHistoryContext.Provider>
+		</Provider>
 	);
 };
 
 export const useBookmarksHistory = () => {
-	return useContext(BookmarksHistoryContext);
+	const context = useContext(BookmarksHistoryContext);
+
+	if (!context) {
+		throw new Error("BookmarksHistoryContext is not defined");
+	}
+
+	return context;
 };

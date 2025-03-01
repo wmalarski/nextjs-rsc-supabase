@@ -1,5 +1,5 @@
 import { useSubmission } from "@solidjs/router";
-import { createMemo } from "solid-js";
+import { useId } from "react";
 import { useI18n } from "~/modules/common/contexts/i18n";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
 import { Button } from "~/ui/button/button";
@@ -15,7 +15,7 @@ import {
 import { CheckIcon } from "~/ui/icons/check-icon";
 import { completeBookmarkAction } from "../client";
 import { useBookmarksHistory } from "../contexts/bookmarks-history";
-import type { BookmarkWithTagsModel } from "../server";
+import type { BookmarkWithTagsModel } from "../services";
 import { CompleteFields } from "./complete-fields";
 
 type CompleteDialogProps = {
@@ -25,8 +25,8 @@ type CompleteDialogProps = {
 export const CompleteDialog = ({ bookmark }: CompleteDialogProps) => {
 	const { t } = useI18n();
 
-	const dialogId = createMemo(() => `complete-dialog-${bookmark.id}`);
-	const formId = createMemo(() => `complete-form-${bookmark.id}`);
+	const dialogId = useId();
+	const formId = useId();
 
 	const submission = useSubmission(
 		completeBookmarkAction,
@@ -42,25 +42,20 @@ export const CompleteDialog = ({ bookmark }: CompleteDialogProps) => {
 	const onSubmit = useActionOnSubmit({
 		action: completeBookmarkAction,
 		onSuccess: () => {
-			closeDialog(dialogId());
+			closeDialog(dialogId);
 		},
 	});
 
 	return (
 		<>
-			<DialogTrigger
-				onClick={onClick}
-				for={dialogId()}
-				size="sm"
-				color="primary"
-			>
+			<DialogTrigger onClick={onClick} for={dialogId} size="sm" color="primary">
 				<CheckIcon className="size-4" />
 				{t("bookmarks.complete.complete")}
 			</DialogTrigger>
-			<Dialog id={dialogId()}>
+			<Dialog id={dialogId}>
 				<DialogBox>
 					<DialogTitle>{t("bookmarks.complete.complete")}</DialogTitle>
-					<form id={formId()} onSubmit={onSubmit}>
+					<form id={formId} onSubmit={onSubmit}>
 						<input type="hidden" value={bookmark.id} name="bookmarkId" />
 						<CompleteFields
 							initialData={bookmark}
@@ -71,7 +66,7 @@ export const CompleteDialog = ({ bookmark }: CompleteDialogProps) => {
 					<DialogActions>
 						<DialogClose />
 						<Button
-							form={formId()}
+							form={formId}
 							color="primary"
 							disabled={submission.pending}
 							isLoading={submission.pending}

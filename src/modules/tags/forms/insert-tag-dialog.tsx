@@ -1,5 +1,5 @@
 import { useSubmission } from "@solidjs/router";
-import type { Component } from "solid-js";
+import { useId } from "react";
 import { useI18n } from "~/modules/common/contexts/i18n";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
 import { Button } from "~/ui/button/button";
@@ -17,11 +17,11 @@ import { PlusIcon } from "~/ui/icons/plus-icon";
 import { insertTagAction } from "../client";
 import { TagFields } from "./tag-fields";
 
-export const InsertTagDialog: Component = () => {
+export const InsertTagDialog = () => {
 	const { t } = useI18n();
 
-	const dialogId = "insert-dialog";
-	const formId = "insert-form";
+	const dialogId = useId();
+	const formId = useId();
 
 	const submission = useSubmission(insertTagAction);
 

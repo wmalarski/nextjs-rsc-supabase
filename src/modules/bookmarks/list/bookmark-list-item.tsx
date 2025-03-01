@@ -18,7 +18,7 @@ import {
 import { ChevronRightIcon } from "~/ui/icons/chevron-right-icon";
 import { Link } from "~/ui/link/link";
 import { useBookmarksHistory } from "../contexts/bookmarks-history";
-import type { BookmarkWithTagsModel } from "../server";
+import type { BookmarkWithTagsModel } from "../services";
 import { CompleteDialog } from "./complete-dialog";
 import { DeleteBookmarkForm } from "./delete-bookmark-form";
 import { UpdateBookmarkDialog } from "./update-bookmark-dialog";
