@@ -1,8 +1,8 @@
+import { PlusIcon } from "@/ui/icons/plus-icon";
+import { Button } from "@heroui/button";
 import { useSubmission } from "@solidjs/router";
-import { Button } from "~/ui/button/button";
 import { Card, CardBody } from "~/ui/card/card";
 import { cardTitleRecipe } from "~/ui/card/card.recipe";
-import { PlusIcon } from "~/ui/icons/plus-icon";
 import { insertBookmarkAction } from "../client";
 import { BookmarkFields, type BookmarkFieldsData } from "./bookmark-fields";
 

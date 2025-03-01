@@ -1,7 +1,8 @@
+import { PencilIcon } from "@/ui/icons/pencil-icon";
+import { Button } from "@heroui/button";
 import { useSubmission } from "@solidjs/router";
 import { useId } from "react";
 import { useActionOnSubmit } from "~/modules/common/utils/use-action-on-submit";
-import { Button } from "~/ui/button/button";
 import {
 	Dialog,
 	DialogActions,
@@ -11,7 +12,6 @@ import {
 	DialogTrigger,
 	closeDialog,
 } from "~/ui/dialog/dialog";
-import { PencilIcon } from "~/ui/icons/pencil-icon";
 import { updateBookmarkAction } from "../client";
 import { useBookmarksHistory } from "../contexts/bookmarks-history";
 import type { BookmarkWithTagsModel } from "../services";

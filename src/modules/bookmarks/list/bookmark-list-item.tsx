@@ -1,4 +1,8 @@
+import { ChevronRightIcon } from "@/ui/icons/chevron-right-icon";
+import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
 import { createVisibilityObserver } from "@solid-primitives/intersection-observer";
+import NextLink from "next/link";
 import type { PropsWithChildren } from "react";
 import { createIsLink } from "~/modules/common/utils/create-is-link";
 import { createDateFormatter } from "~/modules/common/utils/formatters";
@@ -13,13 +17,11 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "~/ui/carousel/carousel";
-import { ChevronRightIcon } from "~/ui/icons/chevron-right-icon";
-import { Link } from "~/ui/link/link";
-import { useBookmarksHistory } from "../contexts/bookmarks-history";
+import { DeleteBookmarkForm } from "../forms/delete-bookmark-form";
+import { UpdateBookmarkDialog } from "../forms/update-bookmark-dialog";
 import type { BookmarkWithTagsModel } from "../services";
+import { useBookmarksHistory } from "../visited/bookmarks-history";
 import { CompleteDialog } from "./complete-dialog";
-import { DeleteBookmarkForm } from "./delete-bookmark-form";
-import { UpdateBookmarkDialog } from "./update-bookmark-dialog";
 
 type BookmarkListItemProps = {
 	bookmark: BookmarkWithTagsModel;
@@ -31,7 +33,7 @@ export const BookmarkListItem = ({ bookmark }: BookmarkListItemProps) => {
 	const history = useBookmarksHistory();
 
 	const onDetailsClick = () => {
-		history().addToHistory(bookmark.id);
+		history.addToHistory(bookmark.id);
 	};
 
 	return (
@@ -56,30 +58,32 @@ export const BookmarkListItem = ({ bookmark }: BookmarkListItemProps) => {
 					<GridText>{formatDate(bookmark.created_at)}</GridText>
 					<GridTitle>Done</GridTitle>
 					<GridText>{String(bookmark.done)}</GridText>
-					<Show when={bookmark.done}>
-						<GridTitle>Done at</GridTitle>
-						<GridText>
-							{bookmark.done_at && formatDate(bookmark.done_at)}
-						</GridText>
-						<GridTitle>Rate</GridTitle>
-						<GridText>{bookmark.rate}</GridText>
-						<GridTitle>Note</GridTitle>
-						<GridText>{bookmark.note}</GridText>
-					</Show>
+					{bookmark.done ? (
+						<>
+							<GridTitle>Done at</GridTitle>
+							<GridText>
+								{bookmark.done_at && formatDate(bookmark.done_at)}
+							</GridText>
+							<GridTitle>Rate</GridTitle>
+							<GridText>{bookmark.rate}</GridText>
+							<GridTitle>Note</GridTitle>
+							<GridText>{bookmark.note}</GridText>
+						</>
+					) : null}
 				</div>
 				<CardActions>
 					<DeleteBookmarkForm bookmark={bookmark} />
 					<CompleteDialog bookmark={bookmark} />
 					<UpdateBookmarkDialog bookmark={bookmark} />
-					<LinkButton
-						onClick={onDetailsClick}
+					<Button
+						onPress={onDetailsClick}
 						href={paths.bookmark(bookmark.id)}
 						size="sm"
 						color="secondary"
 					>
 						<ChevronRightIcon className="size-4" />
 						Details
-					</LinkButton>
+					</Button>
 				</CardActions>
 			</CardBody>
 		</Card>
@@ -110,7 +114,13 @@ const GridLink = ({ bookmarkId, href }: GridLinkProps) => {
 
 	return (
 		<Show when={isLink()} fallback={<GridText>{href}</GridText>}>
-			<Link onClick={onClick} hover={true} href={href} className="break-words">
+			<Link
+				as={NextLink}
+				onClick={onClick}
+				hover={true}
+				href={href}
+				className="break-words"
+			>
 				{href}
 			</Link>
 		</Show>

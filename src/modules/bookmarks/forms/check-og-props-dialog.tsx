@@ -1,6 +1,6 @@
+import { Button } from "@heroui/button";
 import { useState } from "react";
 import { createIsLink } from "~/modules/common/utils/create-is-link";
-import { Button } from "~/ui/button/button";
 import { getOgPropsQuery } from "../client";
 import type { BookmarkFieldsData } from "./bookmark-fields";
 
@@ -44,8 +44,7 @@ export const CheckOgPropsDialog = ({
 		<Button
 			type="button"
 			color="secondary"
-			size="xs"
-			onClick={onCheckClick}
+			onPress={onCheckClick}
 			isLoading={isPending}
 			disabled={isPending}
 		>
