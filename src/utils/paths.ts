@@ -5,4 +5,5 @@ export const paths = {
 	history: "/history",
 	signUp: "/sign-up",
 	login: "/login",
+	bookmark: (id: number) => `/bookmark/${id}`,
 };

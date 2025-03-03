@@ -1,10 +1,9 @@
-import { type PropsWithChildren, useRef } from "react";
-import type { RpcFailure } from "~/modules/common/server/helpers";
+import type { FailureResult } from "@/utils/actions";
+import { Input } from "@heroui/input";
+import { useRef } from "react";
 import { FieldError } from "~/ui/field-error/field-error";
 import { FormControl } from "~/ui/form-control/form-control";
 import { FormError } from "~/ui/form-error/form-error";
-import { Label, LabelText } from "~/ui/label/label";
-import { TextFieldInput } from "~/ui/text-field/text-field";
 import { getInvalidStateProps } from "~/ui/utils/get-invalid-state-props";
 import { BookmarkTagsField } from "./bookmark-tags-field";
 import { CheckOgPropsDialog } from "./check-og-props-dialog";
@@ -20,7 +19,7 @@ export type BookmarkFieldsData = {
 type BookmarkFieldsProps = {
 	initialData?: BookmarkFieldsData;
 	pending?: boolean;
-	result?: RpcFailure;
+	result?: FailureResult;
 };
 
 export const BookmarkFields = ({
@@ -53,19 +52,15 @@ export const BookmarkFields = ({
 			<FormError message={result?.error} />
 
 			<FormControl>
-				<LabelRow>
-					<Label for="title">
-						<LabelText>Title</LabelText>
-					</Label>
-					<CheckOgPropsDialog
-						value={initialData?.title}
-						onCheck={onCheckSubmit}
-					/>
-				</LabelRow>
-				<TextFieldInput
+				<CheckOgPropsDialog
+					value={initialData?.title}
+					onCheck={onCheckSubmit}
+				/>
+				<Input
 					id="title"
 					name="title"
 					placeholder="Title"
+					label="Title"
 					value={initialData?.title}
 					disabled={pending}
 					variant="bordered"
@@ -79,19 +74,12 @@ export const BookmarkFields = ({
 			</FormControl>
 
 			<FormControl>
-				<LabelRow>
-					<Label for="text">
-						<LabelText>Text</LabelText>
-					</Label>
-					<CheckOgPropsDialog
-						value={initialData?.text}
-						onCheck={onCheckSubmit}
-					/>
-				</LabelRow>
-				<TextFieldInput
+				<CheckOgPropsDialog value={initialData?.text} onCheck={onCheckSubmit} />
+				<Input
 					id="text"
 					name="text"
 					placeholder="Text"
+					label="Text"
 					value={initialData?.text}
 					disabled={pending}
 					variant="bordered"
@@ -104,18 +92,11 @@ export const BookmarkFields = ({
 			</FormControl>
 
 			<FormControl>
-				<LabelRow>
-					<Label for="url">
-						<LabelText>Url</LabelText>
-					</Label>
-					<CheckOgPropsDialog
-						value={initialData?.url}
-						onCheck={onCheckSubmit}
-					/>
-				</LabelRow>
-				<TextFieldInput
+				<CheckOgPropsDialog value={initialData?.url} onCheck={onCheckSubmit} />
+				<Input
 					id="url"
 					name="url"
+					label="Url"
 					placeholder="Url"
 					value={initialData?.url}
 					disabled={pending}
@@ -130,19 +111,15 @@ export const BookmarkFields = ({
 			</FormControl>
 
 			<FormControl>
-				<LabelRow>
-					<Label for="preview">
-						<LabelText>Preview</LabelText>
-					</Label>
-					<CheckOgPropsDialog
-						value={initialData?.preview ?? undefined}
-						onCheck={onCheckSubmit}
-					/>
-				</LabelRow>
-				<TextFieldInput
+				<CheckOgPropsDialog
+					value={initialData?.preview ?? undefined}
+					onCheck={onCheckSubmit}
+				/>
+				<Input
 					id="preview"
 					name="preview"
 					placeholder="Preview"
+					label="Preview"
 					value={initialData?.preview ?? undefined}
 					disabled={pending}
 					variant="bordered"
@@ -156,14 +133,6 @@ export const BookmarkFields = ({
 			</FormControl>
 
 			<BookmarkTagsField disabled={pending} initialTags={initialData?.tags} />
-		</div>
-	);
-};
-
-const LabelRow = ({ children }: PropsWithChildren) => {
-	return (
-		<div className="flex w-full items-center justify-between gap-2">
-			{children}
 		</div>
 	);
 };

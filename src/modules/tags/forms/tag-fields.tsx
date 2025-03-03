@@ -1,9 +1,8 @@
-import type { RpcFailure } from "~/modules/common/server/helpers";
+import type { FailureResult } from "@/utils/actions";
+import { Input } from "@heroui/input";
 import { FieldError } from "~/ui/field-error/field-error";
 import { FormControl } from "~/ui/form-control/form-control";
 import { FormError } from "~/ui/form-error/form-error";
-import { Label, LabelText } from "~/ui/label/label";
-import { TextFieldInput } from "~/ui/text-field/text-field";
 import { getInvalidStateProps } from "~/ui/utils/get-invalid-state-props";
 import type { TagModel } from "../services";
 
@@ -12,7 +11,7 @@ export type TagFieldsData = Pick<TagModel, "name">;
 type TagFieldsProps = {
 	initialData?: TagFieldsData;
 	pending?: boolean;
-	result?: RpcFailure;
+	result?: FailureResult;
 };
 
 export const TagFields = ({ initialData, pending, result }: TagFieldsProps) => {
@@ -21,13 +20,11 @@ export const TagFields = ({ initialData, pending, result }: TagFieldsProps) => {
 			<FormError message={result?.error} />
 
 			<FormControl>
-				<Label for="name">
-					<LabelText>Name</LabelText>
-				</Label>
-				<TextFieldInput
+				<Input
 					id="name"
 					name="name"
 					placeholder="Name"
+					label="Name"
 					value={initialData?.name}
 					disabled={pending}
 					variant="bordered"

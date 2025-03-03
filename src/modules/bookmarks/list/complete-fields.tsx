@@ -1,17 +1,18 @@
-import type { RpcFailure } from "~/modules/common/server/helpers";
+import type { FailureResult } from "@/utils/actions";
+import { Input } from "@heroui/input";
+import { NumberInput } from "@heroui/number-input";
 import { Checkbox } from "~/ui/checkbox/checkbox";
 import { FieldError } from "~/ui/field-error/field-error";
 import { FormControl } from "~/ui/form-control/form-control";
 import { FormError } from "~/ui/form-error/form-error";
 import { Label, LabelText } from "~/ui/label/label";
-import { TextFieldInput } from "~/ui/text-field/text-field";
 import { getInvalidStateProps } from "~/ui/utils/get-invalid-state-props";
 import type { BookmarkWithTagsModel } from "../services";
 
 type CompleteFieldsProps = {
 	initialData?: BookmarkWithTagsModel;
 	pending?: boolean;
-	result?: RpcFailure;
+	result?: FailureResult;
 };
 
 export const CompleteFields = ({
@@ -41,13 +42,11 @@ export const CompleteFields = ({
 			</FormControl>
 
 			<FormControl>
-				<Label for="rate">
-					<LabelText>Rate</LabelText>
-				</Label>
-				<TextFieldInput
+				<NumberInput
 					id="rate"
 					name="rate"
 					placeholder="Rate"
+					label="Rate"
 					type="number"
 					min={0}
 					max={10}
@@ -64,13 +63,11 @@ export const CompleteFields = ({
 			</FormControl>
 
 			<FormControl>
-				<Label for="note">
-					<LabelText>Note</LabelText>
-				</Label>
-				<TextFieldInput
+				<Input
 					id="note"
 					name="note"
 					placeholder="Note"
+					label="Note"
 					value={initialData?.note ?? ""}
 					disabled={pending}
 					variant="bordered"

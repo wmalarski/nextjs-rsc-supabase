@@ -1,4 +1,5 @@
 import { ChevronRightIcon } from "@/ui/icons/chevron-right-icon";
+import { paths } from "@/utils/paths";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import { createVisibilityObserver } from "@solid-primitives/intersection-observer";
@@ -6,7 +7,6 @@ import NextLink from "next/link";
 import type { PropsWithChildren } from "react";
 import { createIsLink } from "~/modules/common/utils/create-is-link";
 import { createDateFormatter } from "~/modules/common/utils/formatters";
-import { paths } from "~/modules/common/utils/paths";
 import { Badge } from "~/ui/badge/badge";
 import { LinkButton } from "~/ui/button/button";
 import { Card, CardActions, CardBody } from "~/ui/card/card";
